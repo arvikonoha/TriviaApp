@@ -1,9 +1,9 @@
-name: learn-github-actions
-run-name: ${{ github.actor }} is learning GitHub Actions
+name: run-pr-checks
+run-name: ${{ github.actor }} running Code coverage checks on the PR
 on: [pull_request]
 jobs:
   deepsource:
-    runs-on: ubuntu:latest
+    runs-on: ubuntu-latest
     env:
       DEEPSOURCE_DSN: ${{ secrets.DEEPSOURCE_DSN }}
     steps:
