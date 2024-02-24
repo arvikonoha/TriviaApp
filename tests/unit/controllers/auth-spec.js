@@ -8,6 +8,7 @@ const MOCK_USER = {
 }
 const authController = require('../../../controllers').auth
 const orm = require('../../../orm')
+const fs = require('fs');
 
 
 describe('Auth controller', () => {
@@ -15,6 +16,7 @@ describe('Auth controller', () => {
         let jwtStub = null
         beforeEach(() => {
             jwtStub = sinon.stub(jwt, 'sign')
+            sinon.stub(fs, 'readFileSync').returns('mocked private key content');
         })
         afterEach(() => {
             sinon.restore()
@@ -63,6 +65,7 @@ describe('Auth controller', () => {
             jwtStub = sinon.stub(jwt, 'sign')
             ormFindByName = sinon.stub(orm.users, 'findByName')
             ormSaveUser = sinon.stub(orm.users, 'saveUser')
+            sinon.stub(fs, 'readFileSync').returns('mocked private key content');
         })
         afterEach(() => {
             sinon.restore()
