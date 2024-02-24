@@ -14,7 +14,7 @@
     "sinon": "^17.0.1"
   },
   "scripts": {
-    "test": "mocha --require chai/register-expect.js './tests/**/*-spec.js'",
+    "test": "mocha --require chai/register-expect.js tests/unit/**/**-spec.js",
     "coverage": "nyc --reporter=cobertura npm test"
   },
   "devDependencies": {
