@@ -2,3 +2,5 @@ node_modules
 keys
 package-lock.json
 db-dump
+.nyc_output
+coverage

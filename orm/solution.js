@@ -135,3 +135,7 @@ module.exports.listSubmissions = function listSubmissions(user, quizID) {
 
     return Solution.aggregate(pipeline).exec()
 }
+
+/**
+ * Get the author with max score as per the above logic
+ */

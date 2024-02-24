@@ -35,7 +35,7 @@ module.exports.get = async function get(req, res) {
 module.exports.post = async function post(req, res) {
     try {
         const quizDetails = req.body
-        const dataToHash = quizDetails.title+ quizDetails.difficulty + JSON.stringify(quizDetails.category.sort());
+        const dataToHash = quizDetails.title + quizDetails.difficulty + quizDetails.source + JSON.stringify(quizDetails.category.sort());
         const hash = crypto.createHash('sha256');
         hash.update(dataToHash)
         quizDetails.hash = hash.digest('hex');

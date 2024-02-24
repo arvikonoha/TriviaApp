@@ -7,9 +7,18 @@
     "express-session": "^1.18.0",
     "express-validator": "^7.0.1",
     "jsonwebtoken": "^9.0.2",
+    "mocha": "^10.3.0",
     "mongoose": "^8.1.1",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "sinon": "^17.0.1"
+  },
+  "scripts": {
+    "test": "mocha --require chai/register-expect.js './tests/**/*-spec.js'",
+    "coverage": "nyc --reporter=cobertura npm test"
+  },
+  "devDependencies": {
+    "nyc": "^15.1.0"
   }
 }

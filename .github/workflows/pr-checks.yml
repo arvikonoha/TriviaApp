@@ -1,0 +1,30 @@
+name: learn-github-actions
+run-name: ${{ github.actor }} is learning GitHub Actions
+on: [pull_request]
+jobs:
+  deepsource:
+    runs-on: ubuntu:latest
+    env:
+      DEEPSOURCE_DSN: ${{ secrets.DEEPSOURCE_DSN }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+    
+      - name: Set up nodejs
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+          
+      - name: Installs dependencies
+        run: npm install
+      
+      - name: Run tests and generate coverage
+        run: npm run coverage
+
+      - name: Submit reports to Deepsoruce
+        run: |
+          # Install the CLI
+          curl https://deepsource.io/cli | sh
+
+          # Send the report to DeepSource
+          ./bin/deepsource report --analyzer test-coverage --key javascript --value-file ./coverage/cobertura-coverage.xml
