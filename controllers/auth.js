@@ -1,12 +1,12 @@
 const jwt = require('jsonwebtoken')
 const fs = require('fs')
 const path = require('path')
-const privateKey = fs.readFileSync(path.join(__dirname,'..','keys','private-key.pem'));
 const orm = require('../orm/index')
 const bcrypt = require('bcrypt')
 
 module.exports.login = async (req, res) => {
     try {
+        const privateKey = fs.readFileSync(path.join(__dirname,'..','keys','private-key.pem'));
         const token = jwt.sign({ userId: req.user.id }, privateKey, { algorithm: 'RS256', expiresIn: '1h' });
       
         res.json({ token });
@@ -18,6 +18,7 @@ module.exports.login = async (req, res) => {
 
 module.exports.register = async (req, res) => {
     try {
+        const privateKey = fs.readFileSync(path.join(__dirname,'..','keys','private-key.pem'));
         const {name, password} = req.body
         
         const prevUser = await orm.users.findByName(name)

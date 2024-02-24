@@ -6,9 +6,9 @@ const MOCK_USER = {
     name: 'Aravinda',
     password: 'Trever.Phillips'
 }
+const fs = require('fs');
 const authController = require('../../../controllers').auth
 const orm = require('../../../orm')
-const fs = require('fs');
 
 
 describe('Auth controller', () => {
