@@ -49,7 +49,6 @@ const Quiz = mongoose.Schema({
                 }],
                 validate: {
                 validator: function (array) {
-                    console.log(array)
                     return array.length >= 2;
                 },
                 message: 'Options must have at least 2 items.',

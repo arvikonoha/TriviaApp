@@ -4,7 +4,7 @@ const path = require('path')
 const orm = require('../orm/index')
 const bcrypt = require('bcrypt')
 
-module.exports.login = async (req, res) => {
+module.exports.login = (req, res) => {
     try {
         const privateKey = fs.readFileSync(path.join(__dirname,'..','keys','private-key.pem'));
         const token = jwt.sign({ userId: req.user.id }, privateKey, { algorithm: 'RS256', expiresIn: '1h' });

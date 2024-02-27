@@ -5,6 +5,7 @@ module.exports.get = async function get(req, res) {
     let filter = {}
     let page = 0
     let select = ''
+    const textFilters = ['title']
     try {
         if (req.params.id) {
             filter = {_id: req.params.id}
@@ -21,14 +22,20 @@ module.exports.get = async function get(req, res) {
         } else {
             page = req.query.page
             delete req.query.page
-            filter = req.query
+            filter = Object.entries(req.query).reduce((accumulator, [key, value]) => {
+                if (textFilters.includes(key))
+                    accumulator[key] = { $regex: `^${value}`, $options: 'i' }
+                else accumulator[key] = value
+                return accumulator
+            }, {})
+            
             select = 'title _id category'
         }
         const response = await orm.quiz.list(filter, page, select)
-        res.json(response)
+        return res.json(response)
     } catch (error) {
         console.log(error)
-        res.status(500).json({message: 'Internal server error'})
+        return res.status(500).json({message: 'Internal server error'})
     }
 }
 
@@ -40,10 +47,10 @@ module.exports.post = async function post(req, res) {
         hash.update(dataToHash)
         quizDetails.hash = hash.digest('hex');
         const response = await orm.quiz.create(quizDetails)
-        res.json(response)
+        return res.json(response)
     } catch (error) {
         console.log(error)
-        res.status(500).json({message: 'Internal server error'})
+        return res.status(500).json({message: 'Internal server error'})
     }
 }
 
@@ -51,10 +58,10 @@ module.exports.bulk = async function bulk(req, res) {
     try {
         const quizList = req.body
         const response = await orm.quiz.createMany(quizList)
-        res.json(response)
+        return res.json(response)
     } catch (error) {
         console.log(error)
-        res.status(500).json({message: 'Internal server error'})
+        return res.status(500).json({message: 'Internal server error'})
     }
 }
 
@@ -63,9 +70,20 @@ module.exports.submissions = async (req, res) => {
         const {id} = req.params
         const user = req.user.id
         const submissions = await orm.solution.listSubmissions(user, id)
-        res.json(submissions)
+        return res.json(submissions)
     } catch (error) {
         console.log(error)
-        res.status(500).json({message: 'Internal error'})
+        return res.status(500).json({message: 'Internal error'})
+    }
+}
+
+module.exports.leaderboard = async (req, res) => {
+    try {
+        const {id} = req.params
+        const rankings = await orm.solution.listRankings(id)
+        return res.json(rankings)
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({message: 'Internal error'})
     }
 }

@@ -1,0 +1,133 @@
+{
+  "getById": {
+    "totalCount": 1,
+    "quizlist": [
+      {
+        "_id": "65c8b120e3aacaa8401f115b",
+        "title": "New quiz",
+        "time": "10m",
+        "category": ["New category", "All"],
+        "questions": [
+          {
+            "title": "New questionarie",
+            "description": "Mandatory description",
+            "options": [
+              { "description": "Option1" },
+              { "description": "Option2" },
+              { "description": "Option3" },
+              { "description": "Option4" }
+            ],
+            "_id": "65c8b120e3aacaa8401f115c"
+          }
+        ]
+      }
+    ],
+    "categories": ["All", "General knowledge", "New category"]
+  },
+  "get": {
+    "totalCount": 35,
+    "quizlist": [
+      {
+        "_id": "65c8b120e3aacaa8401f115b",
+        "title": "New quiz",
+        "category": ["New category", "All"]
+      },
+      {
+        "_id": "65d1b729fcc2e7eee4576f5d",
+        "title": "General knowledge-questions-1",
+        "category": ["General knowledge"]
+      },
+      {
+        "_id": "65d1bad668ea6878b21d44a7",
+        "category": ["General knowledge"],
+        "title": "General knowledge-questions-1"
+      },
+      {
+        "_id": "65d1bb3368ea6878b21d4686",
+        "category": ["General knowledge"],
+        "title": "General knowledge-questions-1"
+      },
+      {
+        "_id": "65d1bb6568ea6878b21d4a54",
+        "category": ["General knowledge"],
+        "title": "General knowledge-questions-2"
+      },
+      {
+        "_id": "65d1bb6a68ea6878b21d4c33",
+        "category": ["General knowledge"],
+        "title": "General knowledge-questions-3"
+      },
+      {
+        "_id": "65d1bbf155d46772730d93bb",
+        "category": ["General knowledge"],
+        "title": "General knowledge-questions-1"
+      },
+      {
+        "_id": "65d1bc4755d46772730d9771",
+        "category": ["General knowledge"],
+        "title": "General knowledge-questions-2"
+      },
+      {
+        "_id": "65d1bc5455d46772730d9954",
+        "category": ["General knowledge"],
+        "title": "General knowledge-questions-3"
+      },
+      {
+        "_id": "65d1bc5955d46772730d9b2b",
+        "category": ["General knowledge"],
+        "title": "General knowledge-questions-4"
+      },
+      {
+        "_id": "65d1bd04adc644708ab1928c",
+        "category": ["General knowledge"],
+        "title": "General knowledge-questions-5"
+      },
+      {
+        "_id": "65d1bd13adc644708ab19296",
+        "category": ["General knowledge"],
+        "title": "General knowledge-questions-6"
+      },
+      {
+        "_id": "65d1bd18adc644708ab1929e",
+        "category": ["General knowledge"],
+        "title": "General knowledge-questions-7"
+      },
+      {
+        "_id": "65d1bd26adc644708ab192a7",
+        "category": ["General knowledge"],
+        "title": "General knowledge-questions-8"
+      },
+      {
+        "_id": "65d1bd31adc644708ab192b1",
+        "category": ["General knowledge"],
+        "title": "General knowledge-questions-9"
+      },
+      {
+        "_id": "65d1bd3dadc644708ab192bd",
+        "category": ["General knowledge"],
+        "title": "General knowledge-questions-10"
+      },
+      {
+        "_id": "65d1bd49adc644708ab192c8",
+        "category": ["General knowledge"],
+        "title": "General knowledge-questions-11"
+      },
+      {
+        "_id": "65d1bd55adc644708ab192d1",
+        "category": ["General knowledge"],
+        "title": "General knowledge-questions-12"
+      },
+      {
+        "_id": "65d1bd61adc644708ab192da",
+        "category": ["General knowledge"],
+        "title": "General knowledge-questions-13"
+      },
+      {
+        "_id": "65d1bd6cadc644708ab192e3",
+        "category": ["General knowledge"],
+        "title": "General knowledge-questions-14"
+      }
+    ],
+    "categories": ["All", "General knowledge", "New category"]
+  }
+}

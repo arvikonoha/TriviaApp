@@ -1,0 +1,104 @@
+{
+    "lookUpStage": {
+        "$lookup": {
+            "from": "quizzes",
+            "localField": "quizID",
+            "foreignField": "_id",
+            "as": "quiz"
+        }
+    },
+    "userLookUpStage": {
+        "$lookup": {
+            "from": "users",
+            "as": "authorDetails",
+            "foreignField": "_id",
+            "localField": "_id"
+        }
+    },
+    "unwindStage": {
+        "$unwind": "$quiz"
+    },
+    "userUnwindStage": {
+        "$unwind": "$authorDetails"
+    },
+    "projectStage": {
+      "$project": {
+          "answers": {
+              "$map": {
+                  "input": "$answers",
+                  "as": "selectedAnswer",
+                  "in": {
+                      "title": "$$selectedAnswer.title",
+                      "answer": "$$selectedAnswer.answer",
+                      "actualAnswer": {
+                          "$arrayElemAt": [
+                              {
+                                  "$filter": {
+                                      "input": "$quiz.questions",
+                                      "as": "question",
+                                      "cond": {
+                                          "$eq": ["$$question.title", "$$selectedAnswer.question"]
+                                      }
+                                  }
+                              },
+                              0
+                          ]
+                      }
+                  }
+              }
+          }
+      }
+    },
+    "updateActualAnswerStage": {
+      "$addFields": {
+          "answers": {
+              "$map": {
+                  "input": "$answers",
+                  "as": "selectedAnswer",
+                  "in": {
+                      "title": "$$selectedAnswer.title",
+                      "selectedAnswer": "$$selectedAnswer.answer",
+                      "actualAnswer": {
+                          "$arrayElemAt": [
+                              {
+                                  "$map": {
+                                      "input": "$$selectedAnswer.actualAnswer.options",
+                                      "as": "option",
+                                      "in": {
+                                          "$cond": {
+                                              "if": { "$eq": ["$$option.isAnswer", "true"] },
+                                              "then": "$$option.description",
+                                              "else": null
+                                          }
+                                      }
+                                  }
+                              },
+                              0
+                          ]
+                      }
+                  }
+              }
+          }
+      }
+    },
+    "calculateScoreStage": {
+      "$addFields": {
+          "score": {
+              "$sum": {
+                  "$map": {
+                      "input": "$answers",
+                      "as": "answer",
+                      "in": {
+                          "$cond": {
+                              "if": { "$eq": ["$$answer.selectedAnswer", "$$answer.actualAnswer"] },
+                              "then": 1,
+                              "else": 0
+                          }
+                      }
+                  }
+              }
+          }
+      }
+    }
+  }
+  
