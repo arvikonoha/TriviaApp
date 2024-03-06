@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
+const discussion = require('./chat-init');
 
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost:27015/quiz-app', {
@@ -18,4 +19,16 @@ const passport = require('./passport-init')
 app.use(passport.initialize())
 app.use('/', require('./routes'))
 
-app.listen(4564)
+app.listen(4564, () => {
+    let chatConnectionRetry = 5;
+    function checkConnection() {
+        if (discussion.connected) {
+            console.log('Discussion enabled !')
+        } else if (chatConnectionRetry) {
+            setTimeout(checkConnection, (2**(5-chatConnectionRetry)) * 1000)
+        } else {
+            console.log('Failed to enable discussion ')
+        }
+    }
+    checkConnection()
+})

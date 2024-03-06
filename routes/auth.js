@@ -4,6 +4,6 @@ const passport = require('../passport-init')
 
 // Your login route using passport-local and JWT with RSA
 routes.post('/register', controller.register)
-routes.post('/login', passport.authenticate('local', { session: false }), controller.login);
+routes.post('/login', controller.login);
 
 module.exports = routes
