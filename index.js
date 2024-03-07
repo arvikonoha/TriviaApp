@@ -27,6 +27,7 @@ app.listen(4564, () => {
             console.log('Discussion enabled !')
         } else if (chatConnectionRetry) {
             setTimeout(checkConnection, (2**(5-chatConnectionRetry)) * 1000)
+            chatConnectionRetry--;
         } else {
             console.log('Failed to enable discussion ')
         }

@@ -46,7 +46,7 @@ module.exports.listSubmissions = function listSubmissions(user, quizID) {
 module.exports.listRankings = function listRankings(quizID=null) {
 
     // Match stage
-    let matchStage = {
+    const matchStage = {
         $match: {},
     };;
 

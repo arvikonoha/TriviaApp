@@ -8,10 +8,10 @@ module.exports.register = async function register(req, res) {
             await orm.users.create(user)
             return res.json({token})
         } else {
-            res.status(response.status).json(response.data)
+            return res.status(response.status).json(response.data)
         }
     } catch (error) {
-        res.status(500).json({error: 'Internal server error'})
+        return res.status(500).json({error: 'Internal server error'})
     }
 }
 
@@ -21,7 +21,7 @@ module.exports.login = async function login(req, res) {
         if (response.status === 200) {
             const {token, user} = response.data
 
-            let existingUser = await orm.users.findByName(user.name)
+            const existingUser = await orm.users.findByName(user.name)
             if (existingUser === null) await orm.users.create(user)
             return res.status(response.status).json({token})
         }

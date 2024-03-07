@@ -1,5 +1,4 @@
 const sinon = require('sinon')
-const jwt = require('jsonwebtoken')
 const axios = require('axios')
 const MOCK_TOKEN = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWM3YWQ4YTlmMDRlMWM5YjgwMjgxMDMiLCJpYXQiOjE3MDg3NTc0MzMsImV4cCI6MTcwODc2MTAzM30.FRa-rjceEZuEQydiZWvxUjAXl5VGaPCinzx6T2CcHmwkwvlX4CV71ZneWOmiZyfGEOOPbedlQilZ9UtgpYZNAR_1M6Q6H8mvqdm802uQZfdMa_3h0YttBzOIsbTXOyCrd6pPICbD4uwZF8RTHBnJPF8OeDtE7hGJJeS1A-fIw897W9cf6LB74TUkSCe7x0m_aN1YQWUPXy6N_SZgtaoevrDna00xhR2hFTjyZwljP0U0OshelPvoOeyUYmmgzGTBfsbz9LgzUYLpbtteZfyKN9RPvOvnOeDe4SQ18X_oUnCvYTAnrQsONE6EfhcJ4gTGQ29hLqDzQT68Tp3Mi0MIBw'
 const MOCK_USER_ID = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9';
@@ -7,7 +6,6 @@ const MOCK_USER = {
     name: 'Aravinda',
     password: 'Trever.Phillips'
 }
-const fs = require('fs');
 const authController = require('../../../controllers').auth
 const orm = require('../../../orm')
 
@@ -106,7 +104,6 @@ describe('Auth controller', () => {
         beforeEach(() => {
             axiosStub = sinon.stub(axios, 'post')
             ormCreateStub = sinon.stub(orm.users, 'create')
-            ormNameStub = sinon.stub(orm.users, 'findByName')
         })
         afterEach(() => {
             sinon.restore()
