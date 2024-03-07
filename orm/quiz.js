@@ -3,7 +3,7 @@ const Quiz = require("../models/Quiz")
 module.exports.list = async function list(filter, page, select) {
     const totalCount = await Quiz.countDocuments(filter);
     const categories = await Quiz.distinct('category');
-    const quizlist = await Quiz.find(filter).skip(page).limit(20).select(select)
+    const quizlist = await Quiz.find(filter).skip(page*20).limit(20).select(select)
     return ({
         totalCount,
         quizlist,

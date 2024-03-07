@@ -1,0 +1,12 @@
+{
+  "all": true,
+  "include": [
+    "controllers/**/*",
+    "orm/**/*"
+  ],
+  "exclude": [
+    "controllers/index.js",
+    "orm/index.js"
+  ],
+  "excludeNodeModules": true
+}

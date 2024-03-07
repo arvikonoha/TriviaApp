@@ -1,0 +1,32 @@
+name: run-pr-checks
+run-name: ${{ github.actor }} running Code coverage checks on the PR
+on: [pull_request]
+jobs:
+  deepsource:
+    runs-on: ubuntu-latest
+    env:
+      DEEPSOURCE_DSN: ${{ secrets.DEEPSOURCE_DSN }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+    
+      - name: Set up nodejs
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.13.0'
+          
+      - name: Installs dependencies
+        run: npm install
+      
+      - name: Run tests and generate coverage
+        run: npm run coverage
+
+      - name: Submit reports to Deepsoruce
+        run: |
+          # Install the CLI
+          curl https://deepsource.io/cli | sh
+
+          # Send the report to DeepSource
+          ./bin/deepsource report --analyzer test-coverage --key javascript --value-file ./coverage/cobertura-coverage.xml
