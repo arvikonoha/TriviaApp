@@ -1,8 +1,12 @@
 {
   "all": true,
+  "include": [
+    "controllers/**/*",
+    "orm/**/*"
+  ],
   "exclude": [
-    "frontend/**",
-    "**/tests/**"
+    "controllers/index.js",
+    "orm/index.js"
   ],
   "excludeNodeModules": true
 }
