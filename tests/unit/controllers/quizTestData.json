@@ -129,5 +129,27 @@
       }
     ],
     "categories": ["All", "General knowledge", "New category"]
-  }
+  },
+  "listSubmissions": [
+    {
+      "_id": "65c9927cb1da7e513f43fa63",
+      "answers": [
+        {
+          "selectedAnswer": "Option2",
+          "actualAnswer": "Option1"
+        }
+      ],
+      "score": 0
+    },
+    {
+      "_id": "65c993a9b1da7e513f43fa8a",
+      "answers": [
+        {
+          "selectedAnswer": null,
+          "actualAnswer": "Option1"
+        }
+      ],
+      "score": 0
+    }
+  ]
 }

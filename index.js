@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const discussion = require('./chat-init');
+const swaggerDocs = require('./swagger-init')
 
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost:27015/quiz-app', {
@@ -32,3 +33,4 @@ app.listen(4564, () => {
     }
     checkConnection()
 })
+swaggerDocs(app, 4564)

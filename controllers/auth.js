@@ -11,16 +11,22 @@ module.exports.register = async function register(req, res) {
             res.status(response.status).json(response.data)
         }
     } catch (error) {
-        res.json({error: 'Internal server error'})
+        res.status(500).json({error: 'Internal server error'})
     }
 }
 
 module.exports.login = async function login(req, res) {
     try {
         const response = await axios.post('http://localhost:4329/auth/login', req.body)
-        res.status(response.status).json(response.data)
+        if (response.status === 200) {
+            const {token, user} = response.data
+
+            let existingUser = await orm.users.findByName(user.name)
+            if (existingUser === null) await orm.users.create(user)
+            return res.status(response.status).json({token})
+        }
+        return res.status(response.status).json(response.data)
     } catch (error) {
-        console.log(error)
-        res.json({error: 'Internal server error'})
+        return res.status(500).json({error: 'Internal server error'})
     }
 }

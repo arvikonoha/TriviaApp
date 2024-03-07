@@ -12,7 +12,9 @@
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
-    "sinon": "^17.0.1"
+    "sinon": "^17.0.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0"
   },
   "scripts": {
     "test": "mocha --require chai/register-expect.js tests/unit/**/**-spec.js",

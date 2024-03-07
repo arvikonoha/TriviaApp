@@ -42,22 +42,12 @@ module.exports.get = async function get(req, res) {
 module.exports.post = async function post(req, res) {
     try {
         const quizDetails = req.body
-        const dataToHash = quizDetails.title + quizDetails.difficulty + quizDetails.source + JSON.stringify(quizDetails.category.sort());
+        const questionTitles = quizDetails.questions.map(({title}) => title).join();
+        const dataToHash = `${quizDetails.title}${quizDetails.difficulty}${quizDetails.source}${quizDetails.category.sort()}${questionTitles}`;
         const hash = crypto.createHash('sha256');
         hash.update(dataToHash)
         quizDetails.hash = hash.digest('hex');
         const response = await orm.quiz.create(quizDetails)
-        return res.json(response)
-    } catch (error) {
-        console.log(error)
-        return res.status(500).json({message: 'Internal server error'})
-    }
-}
-
-module.exports.bulk = async function bulk(req, res) {
-    try {
-        const quizList = req.body
-        const response = await orm.quiz.createMany(quizList)
         return res.json(response)
     } catch (error) {
         console.log(error)

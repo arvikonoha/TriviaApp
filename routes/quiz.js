@@ -10,6 +10,5 @@ routes.get('/leaderboard', controllers.quiz.leaderboard)
 routes.get('/:id', controllers.quiz.get)
 routes.get('/', controllers.quiz.get)
 routes.post('/', controllers.quiz.post)
-routes.post('/bulk', controllers.quiz.bulk)
 
 module.exports = routes
