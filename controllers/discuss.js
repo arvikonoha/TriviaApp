@@ -3,7 +3,7 @@ const axios = require('axios')
 module.exports.getOrCreateDiscussion = async (req, res) => {
     try {
         const {name} = req.params
-        const response = await axios.put('http://localhost:4000/rooms/${name}/project/quiz-app', null, {headers: {
+        const response = await axios.put(`http://localhost:4000/rooms/${name}/project/quiz-app`, null, {headers: {
             authorization: req.headers.authorization
         }})
         return res.status(response.status).json(response.data)

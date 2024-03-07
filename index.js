@@ -22,6 +22,9 @@ app.use('/', require('./routes'))
 
 app.listen(4564, () => {
     let chatConnectionRetry = 5;
+    /**
+     * Function to check if discussions are enabled for the quiz, checks after exponential delay
+     */
     function checkConnection() {
         if (discussion.connected) {
             console.log('Discussion enabled !')
